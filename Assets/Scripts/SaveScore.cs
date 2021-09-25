@@ -12,6 +12,6 @@ public static class SaveScoreData
     public static float TotalScore = 0;
     public static void SaveCurrentScore()
     {
-        PlayerPrefs.SetFloat("TotalScore", TotalScore);
+        PlayerPrefs.SetFloat("TotalScore", PlayerPrefs.GetFloat("TotalScore"));
     }
 }

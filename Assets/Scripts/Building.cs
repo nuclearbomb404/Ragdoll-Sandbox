@@ -15,14 +15,15 @@ public class Building : MonoBehaviour
     public GameObject ScoreScript;
     public Rigidbody Spine;
     public IEnumerator KillDelay;
+    public float ExplosivesLeft = 5f;
+    public float CubesLeft = 5f;
     
     void Update()
     {  
         //Checks the velocity on the main bone of the ragdoll
         if(Spine.velocity.y < 0.5f && Spine.velocity.y > -0f && Canvas.GetComponent<Ui>().Started > 1 )
         {
-            StartCoroutine(KillDelay());
-            
+            StartCoroutine(KillDelay());  
         }
         if(Spine.velocity.y !< 0.5f && Spine.velocity.y !> -0.5f && Canvas.GetComponent<Ui>().Started > 1 )
         {
@@ -39,7 +40,7 @@ public class Building : MonoBehaviour
                 {
                     Ray ray = Camera.main.ScreenPointToRay(Input.touches[0].position);
                     RaycastHit hit;
-                    if(Physics.Raycast(ray, out hit, 90f))
+                    if(Physics.Raycast(ray, out hit, 1000f))
                     {
                         if(hit.collider != null)
                         {
@@ -51,16 +52,24 @@ public class Building : MonoBehaviour
                                 //Checks which block is active(1/2)
                                 if(gameObject.name == "Cube")
                                 {
-                                    GameObject InstantCube = Instantiate(Cube, touchpos, Camera.main.transform.rotation);
-                                    BlocksLeft--;
-                                    InstantCube.transform.LookAt(Camera.main.transform.position);
+                                    if(CubesLeft > 0)
+                                    {
+                                        GameObject InstantCube = Instantiate(Cube, touchpos, Camera.main.transform.rotation);
+                                        InstantCube.transform.LookAt(Camera.main.transform.position);
+                                        CubesLeft--;
+                                    }
+
                                 }
                                 //Checks which block is active(2/2)
                                 if(gameObject.name == "Explosive")
                                 {
-                                    GameObject InstantBomb = Instantiate(Explosive, touchpos, Camera.main.transform.rotation);
-                                    BlocksLeft--;
-                                    InstantBomb.transform.LookAt(Camera.main.transform.position);
+                                    if(ExplosivesLeft > 0)
+                                    {
+                                        GameObject InstantBomb = Instantiate(Explosive, touchpos, Camera.main.transform.rotation);
+                                        InstantBomb.transform.LookAt(Camera.main.transform.position);
+                                        ExplosivesLeft--;
+                                    }
+
                                 }
                                     
                             }

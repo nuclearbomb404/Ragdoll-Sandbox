@@ -19,22 +19,25 @@ public class Ui : MonoBehaviour
     public GameObject PauseText;
     public GameObject TotalText;
     public float period;
+    public GameObject CubeText;
+    public GameObject ExplosiveText;
 
 
     public void RestartLevel()
     {
+        TotalText.GetComponent<Text>().text = PlayerPrefs.GetFloat("TotalScore").ToString("f0");
         SaveScoreData.SaveCurrentScore();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
     void Update()
     {
-        if (period > 1)
+        if(period > 1)
         {
-            SaveScoreData.TotalScore++;
+            PlayerPrefs.SetFloat("TotalScore", PlayerPrefs.GetFloat("TotalScore")+1);
             period = 0;
         }
         period += UnityEngine.Time.deltaTime;
-        TotalText.GetComponent<Text>().text = SaveScoreData.TotalScore.ToString("f0");
+        TotalText.GetComponent<Text>().text = PlayerPrefs.GetFloat("TotalScore").ToString("f0");
         PauseText.SetActive(false);
         if(Started > 1)
         {
@@ -42,10 +45,22 @@ public class Ui : MonoBehaviour
             SwitchCube.SetActive(false);
             Play.SetActive(false);
             TotalText.SetActive(false);
+            
         }
         if(Started >= 1)
         {
             PauseBlur.SetActive(false);
+            
+        }
+        if(Started == 1)
+        {
+            ExplosiveText.SetActive(true);
+            CubeText.SetActive(true);
+        }
+        if(Started != 1)
+        {
+            ExplosiveText.SetActive(false);
+            CubeText.SetActive(false);
         }
         if(Paused)
         {
@@ -53,6 +68,8 @@ public class Ui : MonoBehaviour
             PauseBlur.SetActive(true);
             PauseText.SetActive(true);
             TotalText.SetActive(true);
+            ExplosiveText.SetActive(false);
+            CubeText.SetActive(false);
         }
     }
     void Start()
