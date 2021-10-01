@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 6b1b903e83768664bbd6e8420f7d5254
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - rb: {instanceID: 0}
+  - player: {instanceID: 0}
+  - projectile: {instanceID: 0}
+  - spawnplace: {fileID: 7460328070529983068, guid: b50bf501b166a0b47950bf2ff675c203,
+      type: 3}
+  - Joe: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

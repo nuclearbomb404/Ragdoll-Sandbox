@@ -3,27 +3,32 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Bullet
+  - Environment
+  - Alive
+  - Wall
+  - Car
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Ground
+  - 
   - Water
   - UI
-  - PlayerNoBuild
-  - Cube
-  - Player
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - ground
+  - alive
+  - Idk
+  - PlayerLayer
+  - wall
+  - projectilelayer
+  - EndPlatform
+  - Platform
+  - Ceiling
+  - Lava
+  - explosion
   - 
   - 
   - 
