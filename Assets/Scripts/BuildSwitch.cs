@@ -10,7 +10,7 @@ public class BuildSwitch : MonoBehaviour
     public float BlocksLeft = 2f;
     public int selectedBlock = 0;
     bool Switched = false;
-
+    public GameObject Button;
     // Start is called before the first frame update
 
     void Start()
