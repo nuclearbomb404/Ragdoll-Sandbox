@@ -8,6 +8,7 @@ public class ExplosiveBlock : MonoBehaviour
     public Rigidbody rb;
     public GameObject Spine;
     public GameObject CharacterRig;
+    public GameObject explosion;
     void OnCollisionEnter (Collision collider) 
 	{   
         GameObject other = collider.gameObject;
@@ -22,6 +23,7 @@ public class ExplosiveBlock : MonoBehaviour
                 if(Inside.GetComponent<Rigidbody>() != null && Inside != Spine)
                 {
                     Inside.GetComponent<Rigidbody>().AddExplosionForce(750,transform.position,10f);
+                    GameObject Explosion = Instantiate(explosion, transform.position, transform.rotation);
                 }
             }
         }

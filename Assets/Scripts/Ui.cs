@@ -7,8 +7,10 @@ using UnityEngine.SceneManagement;
 public class Ui : MonoBehaviour
 {
     public GameObject Blocks;
+    public GameObject Cube,Explosive;
     public GameObject Character;
-    public Text BlocksLefttext;
+    public Text BlocksLeftText;
+    public Text ExplosivesLeftText;
     public GameObject Play;
     public GameObject SwitchCube;
     public GameObject Restart;
@@ -19,8 +21,9 @@ public class Ui : MonoBehaviour
     public GameObject PauseText;
     public GameObject TotalText;
     public float period;
-    public GameObject CubeText;
-    public GameObject ExplosiveText;
+    public Text CubeText;
+    public Text ExplosiveText;
+    public GameObject BlockText;
 
 
     public void RestartLevel()
@@ -31,6 +34,8 @@ public class Ui : MonoBehaviour
     }
     void Update()
     {
+        ExplosiveText.text = Explosive.GetComponent<Building>().ExplosivesLeft.ToString();
+        CubeText.text = Cube.GetComponent<Building>().CubesLeft.ToString();
         if(period > 1)
         {
             PlayerPrefs.SetFloat("TotalScore", PlayerPrefs.GetFloat("TotalScore")+1);
@@ -54,13 +59,11 @@ public class Ui : MonoBehaviour
         }
         if(Started == 1)
         {
-            ExplosiveText.SetActive(true);
-            CubeText.SetActive(true);
+            BlockText.SetActive(true);
         }
         if(Started != 1)
         {
-            ExplosiveText.SetActive(false);
-            CubeText.SetActive(false);
+            BlockText.SetActive(false);
         }
         if(Paused)
         {
@@ -68,8 +71,7 @@ public class Ui : MonoBehaviour
             PauseBlur.SetActive(true);
             PauseText.SetActive(true);
             TotalText.SetActive(true);
-            ExplosiveText.SetActive(false);
-            CubeText.SetActive(false);
+            BlockText.SetActive(false);
         }
     }
     void Start()

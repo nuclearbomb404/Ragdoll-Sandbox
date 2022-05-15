@@ -398,3 +398,13 @@ C# parse time         : 287ms
 candidates check time : 39ms
 console write time    : 1ms
 
+[api-updater (non-obsolete-error-filter)] 4/2/2022 10:12:33 PM : Starting /home/yasser/Unity/Hub/Editor/2020.3.26f1/Editor/Data/Tools/ScriptUpdater/APIUpdater.NonObsoleteApiUpdaterDetector.exe
+[api-updater (non-obsolete-error-filter)] 
+----------------------------------
+jit/startup time      : 790.397ms
+moved types parse time: 131ms
+candidates parse time : 30ms
+C# parse time         : 633ms
+candidates check time : 51ms
+console write time    : 0ms
+

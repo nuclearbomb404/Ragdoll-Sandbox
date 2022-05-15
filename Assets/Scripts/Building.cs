@@ -15,11 +15,14 @@ public class Building : MonoBehaviour
     public GameObject ScoreScript;
     public Rigidbody Spine;
     public IEnumerator KillDelay;
+    public GameObject SwitchButton;
     public float ExplosivesLeft = 5f;
     public float CubesLeft = 5f;
+
     
     void Update()
     {  
+
         //Checks the velocity on the main bone of the ragdoll
         if(Spine.velocity.y < 0.5f && Spine.velocity.y > -0f && Canvas.GetComponent<Ui>().Started > 1 )
         {
