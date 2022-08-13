@@ -19,7 +19,7 @@ public class ExplosiveBlock : MonoBehaviour
             {
                 GameObject Inside = hitCollider.transform.gameObject;
                 Destroy(gameObject);
-                rb.AddExplosionForce(750,transform.position,10f);
+                rb.AddExplosionForce(750,transform.position,10);
                 if(Inside.GetComponent<Rigidbody>() != null && Inside != Spine)
                 {
                     Inside.GetComponent<Rigidbody>().AddExplosionForce(750,transform.position,10f);

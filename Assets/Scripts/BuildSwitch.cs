@@ -9,7 +9,7 @@ public class BuildSwitch : MonoBehaviour
     public GameObject Blocks;  
     public float BlocksLeft = 2f;
     public int selectedBlock = 0;
-    bool Switched = false;
+    int Switched = 0;
     public GameObject Button;
     // Start is called before the first frame update
 
@@ -19,7 +19,7 @@ public class BuildSwitch : MonoBehaviour
     }
     public void ButtonPress()
     {
-        Switched = !Switched;
+        Switched++;
     }
     void SelectBlock()
     {
@@ -36,13 +36,21 @@ public class BuildSwitch : MonoBehaviour
     void Update()
     {
         int previousSelectedBlock = selectedBlock;
-        if(Switched)
+        if(Switched == 1)
         {
             selectedBlock = 1;
         }
-        if(!Switched)
+        if(Switched == 0)
         {
             selectedBlock = 0;
+        }
+        if(Switched == 2)
+        {
+            selectedBlock = 2;
+        }
+        if(Switched > 2)
+        {
+            Switched = 0;
         }
         if(previousSelectedBlock != selectedBlock)
         {

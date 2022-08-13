@@ -16,7 +16,7 @@ public class Ui : MonoBehaviour
     public GameObject Restart;
     public int Started = 0;
     public Transform PlayStage2;
-    public GameObject PauseBlur;
+    public GameObject PauseBlur,rotatebutton;
     public bool Paused;
     public GameObject PauseText;
     public GameObject TotalText;
@@ -24,6 +24,7 @@ public class Ui : MonoBehaviour
     public Text CubeText;
     public Text ExplosiveText;
     public GameObject BlockText;
+    public GameObject ShopButton,ShopBackground;
 
 
     public void RestartLevel()
@@ -32,10 +33,14 @@ public class Ui : MonoBehaviour
         SaveScoreData.SaveCurrentScore();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
+    public void Shop()
+    {
+        ShopBackground.SetActive(!ShopBackground.active);
+        Debug.Log("Bruh");
+    }
     void Update()
     {
-        ExplosiveText.text = Explosive.GetComponent<Building>().ExplosivesLeft.ToString();
-        CubeText.text = Cube.GetComponent<Building>().CubesLeft.ToString();
+
         if(period > 1)
         {
             PlayerPrefs.SetFloat("TotalScore", PlayerPrefs.GetFloat("TotalScore")+1);
@@ -43,27 +48,22 @@ public class Ui : MonoBehaviour
         }
         period += UnityEngine.Time.deltaTime;
         TotalText.GetComponent<Text>().text = PlayerPrefs.GetFloat("TotalScore").ToString("f0");
-        PauseText.SetActive(false);
+        PauseText.SetActive(false);        
+        if(Started == 0)
+        {
+            ShopButton.SetActive(true);
+        }
         if(Started > 1)
         {
             Time.timeScale = 1f;
             SwitchCube.SetActive(false);
             Play.SetActive(false);
             TotalText.SetActive(false);
-            
+            ShopButton.SetActive(false);
         }
         if(Started >= 1)
         {
             PauseBlur.SetActive(false);
-            
-        }
-        if(Started == 1)
-        {
-            BlockText.SetActive(true);
-        }
-        if(Started != 1)
-        {
-            BlockText.SetActive(false);
         }
         if(Paused)
         {
@@ -71,7 +71,6 @@ public class Ui : MonoBehaviour
             PauseBlur.SetActive(true);
             PauseText.SetActive(true);
             TotalText.SetActive(true);
-            BlockText.SetActive(false);
         }
     }
     void Start()

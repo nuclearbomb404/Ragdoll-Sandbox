@@ -8,21 +8,29 @@ public class Building : MonoBehaviour
 {
     public Vector3 touchpos;
     public GameObject Cube;  
+    public GameObject Platform; 
     public float BlocksLeft = 2f;
     public int selectedBlock = 0;
     public GameObject Explosive;
     public GameObject Canvas;
-    public GameObject ScoreScript;
+    public GameObject ScoreScript,reuf;
     public Rigidbody Spine;
     public IEnumerator KillDelay;
+    public IEnumerator BounceDelay;
     public GameObject SwitchButton;
     public float ExplosivesLeft = 5f;
     public float CubesLeft = 5f;
-
+    public GameObject InstantPlatform;
+    public Rigidbody rb;
+    public bool bounced = false;
     
+    public void RotateButton()
+    {
+            InstantPlatform.transform.Rotate(2,0,0);
+    }
     void Update()
     {  
-
+        Camera.main.transform.position = new Vector3(reuf.transform.position.x,Camera.main.transform.position.y,Camera.main.transform.position.z);
         //Checks the velocity on the main bone of the ragdoll
         if(Spine.velocity.y < 0.5f && Spine.velocity.y > -0f && Canvas.GetComponent<Ui>().Started > 1 )
         {
@@ -55,24 +63,25 @@ public class Building : MonoBehaviour
                                 //Checks which block is active(1/2)
                                 if(gameObject.name == "Cube")
                                 {
-                                    if(CubesLeft > 0)
-                                    {
-                                        GameObject InstantCube = Instantiate(Cube, touchpos, Camera.main.transform.rotation);
-                                        InstantCube.transform.LookAt(Camera.main.transform.position);
-                                        CubesLeft--;
-                                    }
+                                    GameObject InstantCube = Instantiate(Cube, touchpos, Camera.main.transform.rotation);
+                                    InstantCube.transform.LookAt(Camera.main.transform.position);
+                                    CubesLeft--;
 
                                 }
                                 //Checks which block is active(2/2)
                                 if(gameObject.name == "Explosive")
                                 {
-                                    if(ExplosivesLeft > 0)
-                                    {
-                                        GameObject InstantBomb = Instantiate(Explosive, touchpos, Camera.main.transform.rotation);
-                                        InstantBomb.transform.LookAt(Camera.main.transform.position);
-                                        ExplosivesLeft--;
-                                    }
 
+                                    GameObject InstantBomb = Instantiate(Explosive, touchpos, Camera.main.transform.rotation);
+                                    InstantBomb.transform.LookAt(Camera.main.transform.position);
+                                    ExplosivesLeft--;
+
+                                }
+                                if(gameObject.name == "Platform")
+                                {
+                                    InstantPlatform = Instantiate(Platform, touchpos, Camera.main.transform.rotation);
+                                    InstantPlatform.transform.LookAt(Camera.main.transform.position);
+                                    ExplosivesLeft--;
                                 }
                                     
                             }
@@ -80,17 +89,34 @@ public class Building : MonoBehaviour
                     }
                 }
             }
+            if(Canvas.GetComponent<Ui>().Started == 2 && Input.touchCount > 0 && Input.touches[0].phase == TouchPhase.Began)  
+            {
+                if(!bounced)
+                {
+                    rb.AddForce(0,Spine.velocity.y + 25000,0);
+                    StartCoroutine(BounceDelay());
+                }
+                else
+                {
+                    Debug.Log("bruh");
+                }
+            }      
         }
-
-        //7 Second timer that starts when the velocity.y is under 0.5f or over -0.5f 
+        //1 Second timer that starts when the velocity.y is under 0.5f or over -0.5f 
         IEnumerator KillDelay()
         {
-            yield return new WaitForSeconds(3);
+            yield return new WaitForSeconds(1);
             if(Spine.velocity.y < 0.5f && Spine.velocity.y > -0.25f && Canvas.GetComponent<Ui>().Started > 1 )
             {
                 SaveScoreData.SaveCurrentScore();
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             }
+        }
+        IEnumerator BounceDelay()
+        {
+            bounced = true;
+            yield return new WaitForSeconds(3);
+            bounced =false;
         }
     }
 }

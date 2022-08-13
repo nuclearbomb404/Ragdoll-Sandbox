@@ -1,0 +1,4 @@
+#Sat Aug 13 15:57:07 EDT 2022
+base.0=/home/yasser/GitHub/Ragdoll-Sandbox/Library/Bee/Android/Prj/Mono2x/Gradle/launcher/build/intermediates/dex/release/mergeDexRelease/classes.dex
+path.0=classes.dex
+renamed.0=classes.dex
