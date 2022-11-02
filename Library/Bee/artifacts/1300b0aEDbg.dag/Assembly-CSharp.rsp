@@ -360,6 +360,7 @@
 -r:"Library/Bee/artifacts/1300b0aEDbg.dag/UnityEngine.SpatialTracking.ref.dll"
 -r:"Library/Bee/artifacts/1300b0aEDbg.dag/UnityEngine.UI.ref.dll"
 -r:"Library/Bee/artifacts/1300b0aEDbg.dag/UnityEngine.XR.LegacyInputHelpers.ref.dll"
+"Assets/Scripts/AdsManager.cs"
 "Assets/Scripts/BuildSwitch.cs"
 "Assets/Scripts/Building.cs"
 "Assets/Scripts/ExplosiveBlock.cs"
@@ -368,6 +369,7 @@
 "Assets/Scripts/SaveData.cs"
 "Assets/Scripts/SaveScore.cs"
 "Assets/Scripts/Score.cs"
+"Assets/Scripts/Shop.cs"
 "Assets/Scripts/Ui.cs"
 -langversion:9.0
 

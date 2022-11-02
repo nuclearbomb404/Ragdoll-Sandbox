@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.Advertisements;
+
 
 public class Building : MonoBehaviour
 {
@@ -110,6 +112,7 @@ public class Building : MonoBehaviour
             {
                 SaveScoreData.SaveCurrentScore();
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                Advertisement.Show("Interstitial_Android");
             }
         }
         IEnumerator BounceDelay()
